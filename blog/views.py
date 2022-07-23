@@ -13,15 +13,6 @@ def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     form = CommentForm()
     
-    if request.method == "POST":
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.post = post
-            comment.user = request.user
-            comment.date = timezone.now()
-            comment.save()
-            return redirect('post_detail', pk=post.pk)
     context = {
         'post': post,
         'form': form
@@ -56,3 +47,16 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
+
+
+def new_comment(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.user = request.user
+        comment.post = post
+        comment.save()
+        return redirect('post_detail', pk=post.pk)
+    

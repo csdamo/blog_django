@@ -1,0 +1,7 @@
+<form method="post" action='{% url 'new_comment' pk=post.id %}'>
+    <div class="form-group">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-outline-dark" type="submit" value="Submit">
+    </div>
+</form>
