@@ -9,3 +9,8 @@ h1,  h2, h3, h4, p {
 .post { 
    margin-bottom: 100px;
 }
+
+.comments { 
+   border-left: 6px solid rgb(255, 45, 122);
+   background-color: rgba(211, 211, 211, 0.082);
+}

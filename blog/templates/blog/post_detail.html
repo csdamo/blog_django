@@ -10,4 +10,8 @@
         <p> publicado em {{ post.published_date }}</p>
     {% endif %}
     <p> {{ post.text }}</p>
+
+    {% for comment in post.comments.all %}
+    <p class="comments"> {{ comment.text }}</p>
+    {% endfor %}
 {% endblock %}
