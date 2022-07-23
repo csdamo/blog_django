@@ -3,7 +3,7 @@
 {% block content %}
     <h2> {{ post.title }}</a></h2>
     {% if user.is_authenticated %}   
-        <a class="btn btn-danger" href="{% url 'post_edit' pk=post.id %}">Editar</a>
+        <a class="btn btn-outline-dark" href="{% url 'post_edit' pk=post.id %}">Editar</a>
     {% endif %}
    
     {% if post.published_date %}
@@ -12,6 +12,14 @@
     <p> {{ post.text }}</p>
 
     {% for comment in post.comments.all %}
-    <p class="comments"> {{ comment.text }}</p>
+        <p class="comments"> {{ comment.text }}</p>
     {% endfor %}
+
+    <form method="post" >
+        <div class="form-group">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="btn btn-outline-dark" type="submit" value="Submit">
+        </div>
+    </form>
 {% endblock %}
